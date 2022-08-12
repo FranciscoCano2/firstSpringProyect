@@ -24,13 +24,16 @@ public class SeguridadWeb extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configuration(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(usuarioServicio).passwordEncoder(new BCryptPasswordEncoder());
+        auth
+                .userDetailsService(usuarioServicio)
+                .passwordEncoder(new BCryptPasswordEncoder());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                       .antMatchers("/admin/*").hasAnyRole("ADMIN")
+        http
+                .authorizeRequests()
+                       .antMatchers("/admins/*").hasAnyRole("ADMIN")
                        .antMatchers("/css/*", "/js/*", "/img/*", "/**")
                        .permitAll()
                 .and().formLogin()

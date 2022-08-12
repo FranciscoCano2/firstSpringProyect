@@ -1,6 +1,5 @@
 package com.egg.biblio.controladores;
 
-
 import com.egg.biblio.entity.Editorial;
 import com.egg.biblio.excepciones.MiExcepcion;
 import com.egg.biblio.servicio.EditorialService;
@@ -8,6 +7,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author CanoFrancisco
  */
 @Controller
+@PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
 @RequestMapping("/editoriales")
 public class EditorialControlador {
 
@@ -53,7 +54,8 @@ public class EditorialControlador {
     @GetMapping("/lista")
     public String listar(ModelMap modelo) {
         List<Editorial> editoriales = editorialService.listarEditorliales();
-        return "lista_editoriales.html";
+        modelo.addAttribute("editoriales", editoriales);
+        return "editoriales_lista.html";
     }
 
     @GetMapping("/modificar/{id}")

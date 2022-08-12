@@ -23,22 +23,22 @@ public class Usuario {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
-    
-private String name;
-private String email;
-private String password;
 
-@Enumerated(EnumType.STRING)
-private Rol rol;
+    private String name;
+    private String email;
+    private String password;
 
-@Temporal(TemporalType.TIMESTAMP)
-private Date alta;
+    @Enumerated(EnumType.STRING)
+    private Rol rol;
 
-@Temporal(TemporalType.TIMESTAMP)
-private Date baja;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date alta;
 
-@OneToOne
-private Foto foto;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date baja;
+
+    @OneToOne
+    private Foto foto;
 
     public Usuario() {
     }
@@ -117,8 +117,5 @@ private Foto foto;
     public void setFoto(Foto foto) {
         this.foto = foto;
     }
-
-
-
 
 }

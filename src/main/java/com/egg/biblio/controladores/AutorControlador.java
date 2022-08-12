@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author CanoFrancisco
  */
 @Controller
+@PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
 @RequestMapping("/autores")
 public class AutorControlador {
 
@@ -42,7 +44,7 @@ public class AutorControlador {
         try {
             autorServicio.createAutor(name);
         } catch (MiExcepcion ex) {
-           // Logger.getLogger(AutorControlador.class.getName()).log(Level.SEVERE, null, ex);
+            // Logger.getLogger(AutorControlador.class.getName()).log(Level.SEVERE, null, ex);
             return "autor_form.html";
         }
 
@@ -52,7 +54,8 @@ public class AutorControlador {
     @GetMapping("/lista")
     public String listar(ModelMap modelo) {
         List<Autor> autores = autorServicio.listarAutores();
-        return "lista_autores.html";
+        modelo.addAttribute("autores", autores);
+        return "autor_lista.html";
     }
 
     @GetMapping("/modificar/{id}")

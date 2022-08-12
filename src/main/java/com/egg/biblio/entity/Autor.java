@@ -1,5 +1,6 @@
 package com.egg.biblio.entity;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,7 +11,7 @@ import org.hibernate.annotations.GenericGenerator;
  * @author CanoFrancisco
  */
 @Entity
-public class Autor {
+public class Autor implements Serializable {
 
     @Id
     @GeneratedValue(generator = "uuid")

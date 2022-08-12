@@ -18,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author CanoFrancisco
  */
-
 @Service
 public class LibroServicio {
 
@@ -126,6 +125,10 @@ public class LibroServicio {
 
             libroRepositorio.save(libroParaModificar);
         }
+    }
+
+    public Book getOne(Long isbn) {
+        return libroRepositorio.getOne(isbn);
     }
 
     private void validarISBN(Long isbn) throws MiExcepcion {

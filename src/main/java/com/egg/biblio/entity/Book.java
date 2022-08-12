@@ -1,5 +1,6 @@
 package com.egg.biblio.entity;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
 import javax.persistence.Entity;
@@ -13,7 +14,7 @@ import javax.persistence.TemporalType;
  * @author CanoFrancisco
  */
 @Entity
-public class Book {
+public class Book implements Serializable {
 
     @Id
     private Long isbn;
